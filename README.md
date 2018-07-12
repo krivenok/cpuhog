@@ -1,5 +1,5 @@
 # cpuhog
-Simple cpu hog for testing
+Simple CPU hogging tool for testing purposes
 
 ## How to build it?
 
@@ -23,7 +23,7 @@ dk@fedora 16:48:14 ~/git/cpuhog $ [130]
 You can also use environment variables to change cpuhog behavior
 
 * CPUHOG_DEBUG - if set, enables debug logging
-* CPUHOG_DURATION - if set, defines the duration of the execution
+* CPUHOG_DURATION - if set, defines the duration of the execution in seconds
 
 The example below demonstrates the use of environment variables.
 
