@@ -24,6 +24,7 @@ You can also use environment variables to change cpuhog behavior
 
 * CPUHOG_DEBUG - if set, enables debug logging
 * CPUHOG_DURATION - if set, defines the duration of the execution in seconds
+* CPUHOG_SYSCALL - if set, forces cpuhog to do a syscall at each iteration of tight loop (gettid is used now)
 
 The example below demonstrates the use of environment variables.
 

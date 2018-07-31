@@ -7,6 +7,7 @@
 #include <sys/sysinfo.h>
 #include <pthread.h>
 #include <sched.h>
+#include <sys/syscall.h>
 
 int debug = 0;
 
@@ -35,6 +36,7 @@ void *cpu_hog_thread(void *ptr) {
 	cpu_set_t cpuset;
 	int r;
 	char name[16];
+	char* do_syscall = getenv("CPUHOG_SYSCALL");
 
 	assert(t);
 	if (debug) fprintf(stderr,"CPU hog thread %d started\n", t->core_index);
@@ -50,8 +52,13 @@ void *cpu_hog_thread(void *ptr) {
 	assert(r == 0);
 	if (debug) fprintf(stderr,"Changed CPU hog thread %d name to %s\n", t->core_index, name);
 
-	// Start infinite CPU hogging loop
-	while(1);
+	if (do_syscall == NULL) {
+		// Start infinite CPU hogging loop
+		while(1);
+	} else {
+		// Start infinite loop where we do a syscall to trigger user->kernel->user switch
+		while(1) syscall(SYS_gettid);
+	}
 
 	return NULL;
 }
